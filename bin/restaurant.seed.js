@@ -11,3 +11,5 @@ Restaurant.insertMany(data)
   .catch(err => {
     console.log('Error seeding Restaurant model');
   });
+
+  
