@@ -20,7 +20,7 @@ const MongoStore = require('connect-mongo').default;
 
 app.use(
   session({
-    secret: 'Nora&Alvaro', //ASK: esto que es
+    secret: 'Nora&Alvaro', 
     saveUninitialized: false,
     resave: false,
     cookie: {
@@ -35,7 +35,7 @@ app.use(
 
 // 👇 Start handling routes here
 // Contrary to the views version, all routes are controled from the routes/index.js
-const allRoutes = require('./routes'); //ASK: porque es necesario crear este y para que se utiliza la constante
+const allRoutes = require('./routes'); 
 app.use('/api', allRoutes);
 
 const authUserRoutes = require('./routes/auth.user.routes');
