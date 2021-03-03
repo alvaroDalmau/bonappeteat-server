@@ -1,14 +1,22 @@
-const { Schema, model } = require("mongoose");
+const { Schema, model } = require('mongoose');
 
-// TODO: Please make sure you edit the user model to whatever makes sense in this case
 const userSchema = new Schema({
-  username: {
+  email: {
     type: String,
-    unique: true
+    required: true,
+    unique: true,
   },
-  password: String
+  password: {
+    type: String,
+    required: true,
+  },
+  image: {
+    type: String,
+    default:
+      'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_640.png',
+  },
 });
 
-const User = model("User", userSchema);
+const User = model('User', userSchema);
 
 module.exports = User;
