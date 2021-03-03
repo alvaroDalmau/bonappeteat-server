@@ -6,8 +6,9 @@ let BookingModel = require('../models/Booking.model');
 // NOTE: All your API routes will start from /api
 
 // will handle all GET requests to http:localhost:5005/api/todos
-router.get('/bookings/:userId', (req, res) => {
-  TodoModel.find()
+router.get('/bookings/', (req, res) => {
+  BookingModel.find({ user: req.session.Logged })
+    .populate('restaurant')
     .then(todos => {
       res.status(200).json(todos);
     })

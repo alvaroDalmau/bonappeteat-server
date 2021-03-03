@@ -3,9 +3,9 @@ const router = express.Router();
 
 let RestaurantModel = require('../models/Restaurant.model');
 
-// NOTE: All your API routes will start from /api
+// NOTE: All API routes will start from /api
 
-// will handle all GET requests to http:localhost:5005/api/todos
+// will handle all GET requests to http:localhost:5005/api/restaurants
 router.get('/restaurants', (req, res) => {
   RestaurantModel.find()
     .then(response => {
@@ -19,8 +19,8 @@ router.get('/restaurants', (req, res) => {
     });
 });
 
-// will handle all GET requests to http:localhost:5005/api/todos/:todoId
-//PS: Don't type :todoId , it's something dynamic,
+// will handle all GET requests to http:localhost:5005/api/restaurant/:restaurantId
+//PS: Don't type :restaurantId , it's something dynamic,
 router.get('/restaurant/:restaurantId', (req, res) => {
   RestaurantModel.findById(req.params.restaurantId)
     .then(response => {

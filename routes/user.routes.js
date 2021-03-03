@@ -3,29 +3,9 @@ const router = express.Router();
 
 let UserModel = require('../models/User.model');
 
-// NOTE: All your API routes will start from /api
+// NOTE: All API routes will start from /api
 
-// will handle all POST requests to http:localhost:5005/api/create
-
-router.post('/user/create', (req, res) => {
-  const { email, password } = req.body;
-  console.log(req.body);
-  UserModel.create({
-    email,
-    password,
-  })
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(500).json({
-        error: 'Something went wrong',
-        message: err,
-      });
-    });
-});
-
-// will handle all GET requests to http:localhost:5005/api/todos/:todoId
+// will handle all GET requests to http:localhost:5005/api/user/:userId
 //PS: Don't type :todoId , it's something dynamic,
 router.get('/user/:userId', (req, res) => {
   UserModel.findById(req.params.userId)
@@ -40,7 +20,7 @@ router.get('/user/:userId', (req, res) => {
     });
 });
 
-// will handle all DELETE requests to http:localhost:5005/api/todos/:id
+// will handle all DELETE requests to http:localhost:5005/api/user/:userId
 router.delete('/user/:userId', (req, res) => {
   UserModel.findByIdAndDelete(req.params.userId)
     .then(response => {
@@ -54,7 +34,7 @@ router.delete('/user/:userId', (req, res) => {
     });
 });
 
-// will handle all PATCH requests to http:localhost:5005/api/todos/:id
+// will handle all PATCH requests to http:localhost:5005/api/user/:userId
 router.patch('/user/:userId', (req, res) => {
   let id = req.params.userId;
   const { email, password } = req.body;
