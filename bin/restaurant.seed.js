@@ -5,6 +5,7 @@ const data = require('../data.js');
 
 Restaurant.insertMany(data)
   .then(response => {
+    console.log('Data inserted');
     mongoose.connection.close();
   })
   .catch(err => {
