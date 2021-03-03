@@ -76,6 +76,7 @@ router.post('/user/log', (req, res) => {
           .then(user => {
             // ensuring that we don't share the hash as well with the user
             user.passwordHash = '***';
+            req.session.loggedInUser = response;
             res.status(200).json(user);
           })
           .catch(err => {
@@ -119,9 +120,39 @@ const isLoggedIn = (req, res, next) => {
 };
 
 // THIS IS A PROTECTED ROUTE
-// will handle all get requests to http:localhost:5005/api/user //ASK: cuales se protegen
+// will handle all get requests to http:localhost:5005/api/user
 router.get('/user', isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
+});
+// will handle all DELETE requests to http:localhost:5005/api/user/:userId
+router.delete('/user/', isLoggedIn, (req, res) => {
+  UserModel.findByIdAndDelete(req.params.loggedInUser)
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: 'Something went wrong',
+        message: err,
+      });
+    });
+});
+
+// will handle all PATCH requests to http:localhost:5005/api/user/:userId
+router.patch('/user/', isLoggedIn, (req, res) => {
+  let id = req.params.loggedInUser;
+  const { email, password } = req.body;
+  TodoModel.findByIdAndUpdate(id, { email, password })
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      console.log(err);
+      res.status(500).json({
+        error: 'Something went wrong',
+        message: err,
+      });
+    });
 });
 
 module.exports = router;
