@@ -1,12 +1,9 @@
 const express = require('express');
 const router = express.Router();
-
-//we installed bcrypt.js
 const bcrypt = require('bcryptjs');
-
 const UserModel = require('../models/User.model');
 
-// will handle all POST requests to http://localhost:5005/api/user/log
+// will handle POST requests of signIN/signUp to http://localhost:5005/api/user/log
 router.post('/user/log', (req, res) => {
   const { email, password } = req.body;
 
@@ -99,13 +96,6 @@ router.post('/user/log', (req, res) => {
     });
 });
 
-// will handle all POST requests to http://localhost:5005/api/logout
-router.post('/logout', (req, res) => {
-  req.session.destroy();
-  // Nothing to send back to the user
-  res.status(204).json({});
-});
-
 // middleware to check if user is loggedIn
 const isLoggedIn = (req, res, next) => {
   if (req.session.loggedInUser) {
@@ -119,14 +109,14 @@ const isLoggedIn = (req, res, next) => {
   }
 };
 
-// THIS IS A PROTECTED ROUTE
+// THIS ARE PROTECTED ROUTE
 // will handle all get requests to http://localhost:5005/api/user
 router.get('/user', isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
 });
 // will handle all DELETE requests to http://localhost:5005/api/user
 router.delete('/user/', isLoggedIn, (req, res) => {
-  UserModel.findByIdAndDelete(req.params.loggedInUser)
+  UserModel.findByIdAndDelete(req.session.loggedInUser._id)
     .then(response => {
       res.status(200).json(response);
     })
@@ -139,8 +129,8 @@ router.delete('/user/', isLoggedIn, (req, res) => {
 });
 
 // will handle all PATCH requests to http://localhost:5005/api/user
-router.patch('/user/', isLoggedIn, (req, res) => {
-  let id = req.params.loggedInUser;
+router.patch('/user', isLoggedIn, (req, res) => {
+  let id = req.session.loggedInUser._id;
   const { email, password } = req.body;
   TodoModel.findByIdAndUpdate(id, { email, password })
     .then(response => {
@@ -153,6 +143,13 @@ router.patch('/user/', isLoggedIn, (req, res) => {
         message: err,
       });
     });
+});
+
+// will handle all POST requests to http://localhost:5005/api/logout
+router.post('/logout', isLoggedIn, (req, res) => {
+  req.session.destroy();
+  // Nothing to send back to the user
+  res.status(204).json({});
 });
 
 module.exports = router;
