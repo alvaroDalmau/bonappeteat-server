@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 
 const UserModel = require('../models/User.model');
 
-// will handle all POST requests to http:localhost:5005/api/create
+// will handle all POST requests to http://localhost:5005/api/user/log
 router.post('/user/log', (req, res) => {
   const { email, password } = req.body;
 
