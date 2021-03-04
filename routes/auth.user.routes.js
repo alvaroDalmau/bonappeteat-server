@@ -99,7 +99,7 @@ router.post('/user/log', (req, res) => {
     });
 });
 
-// will handle all POST requests to http:localhost:5005/api/logout
+// will handle all POST requests to http://localhost:5005/api/logout
 router.post('/logout', (req, res) => {
   req.session.destroy();
   // Nothing to send back to the user
@@ -120,11 +120,11 @@ const isLoggedIn = (req, res, next) => {
 };
 
 // THIS IS A PROTECTED ROUTE
-// will handle all get requests to http:localhost:5005/api/user
+// will handle all get requests to http://localhost:5005/api/user
 router.get('/user', isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
 });
-// will handle all DELETE requests to http:localhost:5005/api/user/:userId
+// will handle all DELETE requests to http://localhost:5005/api/user
 router.delete('/user/', isLoggedIn, (req, res) => {
   UserModel.findByIdAndDelete(req.params.loggedInUser)
     .then(response => {
@@ -138,7 +138,7 @@ router.delete('/user/', isLoggedIn, (req, res) => {
     });
 });
 
-// will handle all PATCH requests to http:localhost:5005/api/user/:userId
+// will handle all PATCH requests to http://localhost:5005/api/user
 router.patch('/user/', isLoggedIn, (req, res) => {
   let id = req.params.loggedInUser;
   const { email, password } = req.body;
