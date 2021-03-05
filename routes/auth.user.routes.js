@@ -115,7 +115,7 @@ router.get('/user', isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
 });
 // will handle all DELETE requests to http://localhost:5005/api/user
-router.delete('/user/', isLoggedIn, (req, res) => {
+router.delete('/user', isLoggedIn, (req, res) => {
   UserModel.findByIdAndDelete(req.session.loggedInUser._id)
     .then(response => {
       res.status(200).json(response);

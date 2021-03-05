@@ -6,7 +6,7 @@ let RestaurantModel = require("../models/Restaurant.model");
 // NOTE: All API routes will start from /api
 
 // will handle all GET requests to http://localhost:5005/api/restaurants
-router.get('/restaurants', (req, res) => {
+router.get("/restaurants", (req, res) => {
   RestaurantModel.find()
     .then((response) => {
       res.status(200).json(response);
