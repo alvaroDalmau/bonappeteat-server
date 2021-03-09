@@ -47,6 +47,8 @@ app.use('/api', bookingRoutes);
 const restaurantRoutes = require('./routes/restaurant.routes');
 app.use('/api', restaurantRoutes);
 
+const cloudinaryRoutes = require("./routes/cloudinary.routes.js");
+app.use("/api", cloudinaryRoutes);
 
 // ❗ To handle errors. Routes that don't exist or errors that you handle in specific routes
 require('./error-handling')(app);

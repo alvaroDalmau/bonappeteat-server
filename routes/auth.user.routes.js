@@ -114,9 +114,40 @@ const isLoggedIn = (req, res, next) => {
 router.get("/user", isLoggedIn, (req, res, next) => {
   res.status(200).json(req.session.loggedInUser);
 });
+
 // will handle all DELETE requests to http://localhost:5005/api/user
 router.delete("/user", isLoggedIn, (req, res) => {
   UserModel.findByIdAndDelete(req.session.loggedInUser._id)
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Something went wrong",
+        message: err,
+      });
+    });
+});
+
+// PROFILE INFO
+
+router.get("/user/:userId", (req, res) => {
+  UserModel.findById(req.params.userId)
+    .then((response) => {
+      res.status(200).json(response);
+    })
+    .catch((err) => {
+      res.status(500).json({
+        error: "Something went wrong",
+        message: err,
+      });
+    });
+});
+
+router.patch("/user/:userId", (req, res) => {
+  let id = req.params.userId;
+  const { email, password, image} = req.body;
+  UserModel.findByIdAndUpdate(req.params.userId, { email, password, image })
     .then((response) => {
       res.status(200).json(response);
     })
@@ -132,7 +163,7 @@ router.delete("/user", isLoggedIn, (req, res) => {
 router.patch("/user", isLoggedIn, (req, res) => {
   let id = req.session.loggedInUser._id;
   const { email, password } = req.body;
-  TodoModel.findByIdAndUpdate(id, { email, password })
+  UserModel.findByIdAndUpdate(id, { email, password })
     .then((response) => {
       res.status(200).json(response);
     })
@@ -144,6 +175,7 @@ router.patch("/user", isLoggedIn, (req, res) => {
       });
     });
 });
+
 
 // will handle all POST requests to http://localhost:5005/api/logout
 router.post("/logout", isLoggedIn, (req, res) => {
