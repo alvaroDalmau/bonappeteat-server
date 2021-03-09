@@ -6,11 +6,12 @@ let BookingModel = require('../models/Booking.model');
 // NOTE: All your API routes will start from /api
 
 // will handle all GET requests to http:localhost:5005/api/todos
-router.get('/bookings/', (req, res) => {
-  BookingModel.find({ user: req.session.Logged })
+router.get('/bookings', (req, res) => {
+  BookingModel.find({ user: req.session.loggedInUser })
+    .populate('user')
     .populate('restaurant')
-    .then(todos => {
-      res.status(200).json(todos);
+    .then(response => {
+      res.status(200).json(response);
     })
     .catch(err => {
       res.status(500).json({
@@ -19,71 +20,20 @@ router.get('/bookings/', (req, res) => {
       });
     });
 });
-
 // will handle all POST requests to http:localhost:5005/api/create
-
-router.post('/create', (req, res) => {
-  const { name, description, completed } = req.body;
+router.post('/:restaurantId/create', (req, res) => {
+  const { dateTime, pax } = req.body;
   console.log(req.body);
-  TodoModel.create({
-    name: name,
-    description: description,
-    completed: completed,
+  BookingModel.create({
+    user: req.session.loggedInUser,
+    restaurant: req.params.restaurantId,
+    dateTime: dateTime,
+    pax: pax,
   })
     .then(response => {
       res.status(200).json(response);
     })
     .catch(err => {
-      res.status(500).json({
-        error: 'Something went wrong',
-        message: err,
-      });
-    });
-});
-
-// will handle all GET requests to http:localhost:5005/api/todos/:todoId
-//PS: Don't type :todoId , it's something dynamic,
-router.get('/todos/:todoId', (req, res) => {
-  TodoModel.findById(req.params.todoId)
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(500).json({
-        error: 'Something went wrong',
-        message: err,
-      });
-    });
-});
-
-// will handle all DELETE requests to http:localhost:5005/api/todos/:id
-router.delete('/todos/:id', (req, res) => {
-  TodoModel.findByIdAndDelete(req.params.id)
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(500).json({
-        error: 'Something went wrong',
-        message: err,
-      });
-    });
-});
-
-// will handle all PATCH requests to http:localhost:5005/api/todos/:id
-router.patch('/todos/:id', (req, res) => {
-  let id = req.params.id;
-  const { name, description, completed } = req.body;
-  TodoModel.findByIdAndUpdate(
-    id,
-    { $set: { name: name, description: description, completed: completed } },
-    { new: true }
-  )
-    .then(response => {
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      console.log(err);
       res.status(500).json({
         error: 'Something went wrong',
         message: err,

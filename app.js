@@ -27,7 +27,7 @@ app.use(
       maxAge: 1000 * 60 * 60 * 24 * 7, // is in milliseconds.  expiring in 7 days
     },
     store: new MongoStore({
-      mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost/ReactTodos',
+      mongoUrl: process.env.MONGODB_URI || 'mongodb://localhost/bonappeteat',
       ttl: 60 * 60 * 24 * 7, // is in seconds. expiring in 7 days
     }),
   })

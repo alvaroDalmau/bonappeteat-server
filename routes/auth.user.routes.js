@@ -113,31 +113,35 @@ const isLoggedIn = (req, res, next) => {
 // THIS ARE PROTECTED ROUTE
 // will handle all get requests to http://localhost:5005/api/user
 router.get('/user', isLoggedIn, (req, res, next) => {
-  console.log(req.session.loggedInUser);
   res.status(200).json(req.session.loggedInUser);
 });
 
 // will handle POST IMG CLOUDINARY requests to http://localhost:5005/api/user
-router.post('/uploadprofile', uploader.single('image'), (req, res, next) => {
-  console.log(req);
-  UserModel.findByIdAndUpdate(
-    req.session.loggedInUser._id,
-    {
-      image: req.file.path,
-    },
-    { new: true }
-  )
-    .then(response => {
-      req.session.loggedInUser = response;
-      res.status(200).json(response);
-    })
-    .catch(err => {
-      res.status(500).json({
-        error: 'Something went wrong uploading profile img',
-        message: err,
+router.post(
+  '/uploadprofile',
+  uploader.single('image'),
+  isLoggedIn,
+  (req, res, next) => {
+    UserModel.findByIdAndUpdate(
+      req.session.loggedInUser._id,
+      {
+        image: req.file.path,
+      },
+      { new: true }
+    )
+      .then(response => {
+        console.log(response.image);
+        req.session.loggedInUser = response;
+        res.status(200).json(response);
+      })
+      .catch(err => {
+        res.status(500).json({
+          error: 'Something went wrong uploading profile img',
+          message: err,
+        });
       });
-    });
-});
+  }
+);
 
 // will handle all DELETE requests to http://localhost:5005/api/user
 router.delete('/user', isLoggedIn, (req, res) => {
@@ -180,7 +184,7 @@ router.patch('/user', isLoggedIn, (req, res) => {
   // }
   let salt = bcrypt.genSaltSync(10);
   let hash = bcrypt.hashSync(password, salt);
-  UserModel.findOne(email)
+  UserModel.findOne({ email })
     .then(response => {
       if (response) {
         res.status(500).json({
