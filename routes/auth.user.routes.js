@@ -3,6 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const uploader = require('../middlewares/cloudinary.config.js');
 const UserModel = require('../models/User.model');
+const BookingModel = require('../models/Booking.model');
 
 // will handle POST requests of signIN/signUp to http://localhost:5005/api/user/log
 router.post('/user/log', (req, res) => {
@@ -211,6 +212,42 @@ router.patch('/user', isLoggedIn, (req, res) => {
     })
     .catch(err => {
       console.log(err);
+    });
+});
+
+// USER BOOKINGS
+// will handle all GET requests OF BOOKINGS to http:localhost:5005/api/bookings
+router.get('/bookings', (req, res) => {
+  BookingModel.find({ user: req.session.loggedInUser._id })
+    .populate('restaurant')
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: 'Something went wrong',
+        message: err,
+      });
+    });
+});
+
+// will handle all POST requests OF BOOKINGS to http:localhost:5005/api/:restaurantId/create
+router.post('/:restaurantId/create', isLoggedIn, (req, res) => {
+  const { dateTime, pax } = req.body;
+  BookingModel.create({
+    user: req.session.loggedInUser._id,
+    restaurant: req.params.restaurantId,
+    dateTime: dateTime,
+    pax: pax,
+  })
+    .then(response => {
+      res.status(200).json(response);
+    })
+    .catch(err => {
+      res.status(500).json({
+        error: 'Something went wrong',
+        message: err,
+      });
     });
 });
 

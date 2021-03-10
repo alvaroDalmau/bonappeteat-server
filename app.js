@@ -45,9 +45,6 @@ app.use('/api', allRoutes);
 const authUserRoutes = require('./routes/auth.user.routes');
 app.use('/api', authUserRoutes);
 
-const bookingRoutes = require('./routes/booking.routes');
-app.use('/api', bookingRoutes);
-
 const restaurantRoutes = require('./routes/restaurant.routes');
 app.use('/api', restaurantRoutes);
 
