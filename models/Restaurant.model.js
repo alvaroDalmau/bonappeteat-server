@@ -16,7 +16,7 @@ const restaurantSchema = new Schema({
     },
   ],
   location: {
-    type: String,
+    type: Array,
     required: true,
   },
   category: {
@@ -29,7 +29,3 @@ const restaurantSchema = new Schema({
 const Restaurant = model('Restaurant', restaurantSchema);
 
 module.exports = Restaurant;
-
-  
-
-

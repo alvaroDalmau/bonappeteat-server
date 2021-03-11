@@ -8,8 +8,9 @@ const data = [
       'https://rs-menus-api.roocdn.com/images/ac80832f-46f1-4198-b3d3-3a0ae20082eb/image.jpeg?width=1200&height=630&auto=webp&format=jpg&fit=crop&v=',
       'https://www.animalgourmet.com/wp-content/uploads/2017/01/dumplings2-e1513610872911.jpg',
     ],
-    location: 'ey',
+    location: [43.27176, -2.95059],
     category: 'Chinese',
+    rating: 0,
   },
   {
     name: 'Namaste Restaurant',
@@ -20,8 +21,9 @@ const data = [
       'https://scontent.fmad16-1.fna.fbcdn.net/v/t1.0-9/84282892_131311225286234_8019179816473276771_n.jpg?_nc_cat=100&ccb=3&_nc_sid=8bfeb9&_nc_ohc=M9p0k95BfvQAX9yF0AB&_nc_ht=scontent.fmad16-1.fna&oh=55394b01b967994c3b25b40c6ce8b6c3&oe=6066BC82',
       'https://scontent.fmad16-1.fna.fbcdn.net/v/t1.0-9/106549241_131311211952902_8228797365516229956_n.jpg?_nc_cat=102&ccb=3&_nc_sid=8bfeb9&_nc_ohc=EX3dD83qN_EAX9I8F8h&_nc_ht=scontent.fmad16-1.fna&oh=ca2046b8ff82990a6de518ebc63872df&oe=6065B6D6',
     ],
-    location: 'ey',
+    location: [43.26009, -2.93265],
     category: 'Indian',
+    rating: 0,
   },
   {
     name: 'La Brasa Canalla',
@@ -31,8 +33,9 @@ const data = [
       'https://static1.abc.es/media/viajar/2019/05/24/new-york-burger-kl5--620x349@abc.jpg',
       'https://gourmetdemexico.com.mx/wp-content/uploads/2016/11/field_image_head_hamburguesas_eu.jpg',
     ],
-    location: 'ey',
+    location: [43.26009, -2.935],
     category: 'Burguer',
+    rating: 0,
   },
   {
     name: 'Casa Leotta',
@@ -42,8 +45,9 @@ const data = [
       'https://www.casaleotta.es/webtemp/slider4.jpg',
       'https://media-cdn.tripadvisor.com/media/photo-s/11/ab/f6/c5/pinsas.jpg',
     ],
-    location: 'ey',
+    location: [43.26009, -2.93265],
     category: 'Italian',
+    rating: 0,
   },
   {
     name: 'Atelier Etxanobe',
@@ -54,9 +58,9 @@ const data = [
       'http://lariadelocio.es/wp-content/uploads/2019/05/atelier.jpg',
       'https://static2.elcorreo.com/www/multimedia/201803/02/media/cortadas/atelier%20(2)-k9fE-U501144032483cwB-624x385@El%20Correo.jpg',
     ],
-    location: 'ey',
+    location: [43.264, -2.93265],
     category: 'Spanish',
+    rating: 0,
   },
 ];
-
 module.exports = data;
