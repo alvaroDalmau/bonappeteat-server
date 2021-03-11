@@ -16,13 +16,17 @@ const restaurantSchema = new Schema({
     },
   ],
   location: {
-    type: String,
+    type: Array,
     required: true,
   },
   category: {
     type: String,
     required: true,
-    enum: ['Chinese', 'Indian', 'Burguer', 'Italian', 'Spanish'],
+    enum: ["Chinese", "Indian", "Burguer", "Italian", "Spanish"],
+  },
+  rating: {
+    type: Number,
+    required: true,
   },
 });
 
