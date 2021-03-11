@@ -9,7 +9,7 @@ const data = [
       'https://www.animalgourmet.com/wp-content/uploads/2017/01/dumplings2-e1513610872911.jpg',
     ],
     location: [43.27176, -2.95059],
-    category: "Chinese",
+    category: 'Chinese',
     rating: 0,
   },
   {
@@ -22,7 +22,7 @@ const data = [
       "https://scontent.fmad16-1.fna.fbcdn.net/v/t1.0-9/106549241_131311211952902_8228797365516229956_n.jpg?_nc_cat=102&ccb=3&_nc_sid=8bfeb9&_nc_ohc=EX3dD83qN_EAX9I8F8h&_nc_ht=scontent.fmad16-1.fna&oh=ca2046b8ff82990a6de518ebc63872df&oe=6065B6D6",
     ],
     location: [43.26009, -2.93265],
-    category: "Indian",
+    category: 'Indian',
     rating: 0,
   },
   {
@@ -34,7 +34,7 @@ const data = [
       "https://gourmetdemexico.com.mx/wp-content/uploads/2016/11/field_image_head_hamburguesas_eu.jpg",
     ],
     location: [43.26009, -2.935],
-    category: "Burguer",
+    category: 'Burguer',
     rating: 0,
   },
   {
@@ -46,7 +46,7 @@ const data = [
       "https://media-cdn.tripadvisor.com/media/photo-s/11/ab/f6/c5/pinsas.jpg",
     ],
     location: [43.26009, -2.93265],
-    category: "Italian",
+    category: 'Italian',
     rating: 0,
   },
   {
@@ -59,9 +59,8 @@ const data = [
       "https://static2.elcorreo.com/www/multimedia/201803/02/media/cortadas/atelier%20(2)-k9fE-U501144032483cwB-624x385@El%20Correo.jpg",
     ],
     location: [43.264, -2.93265],
-    category: "Spanish",
+    category: 'Spanish',
     rating: 0,
   },
 ];
-
 module.exports = data;
