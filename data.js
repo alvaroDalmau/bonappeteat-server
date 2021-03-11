@@ -4,9 +4,9 @@ const data = [
     description:
       "We are the first Chinese restaurant to open in Deusto, we have been with our customers for 40 years.",
     images: [
-      "https://live.mrf.io/statics/i/ps/www.cocinacaserayfacil.net/wp-content/uploads/2019/11/Comida-china.jpg?width=1200&enable=upscale",
-      "https://cdn.computerhoy.com/sites/navi.axelspringer.es/public/styles/1200/public/media/s/2018/03/293169-comida-china-sal.jpg?itok=sHNt_j4X",
-      "https://www.animalgourmet.com/wp-content/uploads/2017/01/dumplings2-e1513610872911.jpg",
+      'https://live.mrf.io/statics/i/ps/www.cocinacaserayfacil.net/wp-content/uploads/2019/11/Comida-china.jpg?width=1200&enable=upscale',
+      'https://rs-menus-api.roocdn.com/images/ac80832f-46f1-4198-b3d3-3a0ae20082eb/image.jpeg?width=1200&height=630&auto=webp&format=jpg&fit=crop&v=',
+      'https://www.animalgourmet.com/wp-content/uploads/2017/01/dumplings2-e1513610872911.jpg',
     ],
     location: [43.27176, -2.95059],
     category: "Chinese",
