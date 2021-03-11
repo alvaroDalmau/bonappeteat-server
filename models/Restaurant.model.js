@@ -19,6 +19,7 @@ const restaurantSchema = new Schema({
     type: Array,
     required: true,
   },
+
   category: {
     type: String,
     required: true,
