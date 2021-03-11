@@ -9,8 +9,12 @@ const bookingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Restaurant',
   },
-  dateTime: {
+  date: {
     type: Date,
+    required: true,
+  },
+  time: {
+    type: String,
     required: true,
   },
   pax: {
