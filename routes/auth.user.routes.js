@@ -13,7 +13,7 @@ router.post('/user/log', (req, res) => {
 
   if (!email || !password) {
     res.status(500).json({
-      errorMessage: 'Please enter username, email and password',
+      errorMessage: 'Please enter email and password',
     });
     return;
   }
@@ -233,11 +233,12 @@ router.get('/bookings', (req, res) => {
 
 // will handle all POST requests OF BOOKINGS to http:localhost:5005/api/:restaurantId/create
 router.post('/:restaurantId/create', isLoggedIn, (req, res) => {
-  const { dateTime, pax } = req.body;
+  const { date, time, pax } = req.body;
   BookingModel.create({
     user: req.session.loggedInUser._id,
     restaurant: req.params.restaurantId,
-    dateTime: dateTime,
+    date: date,
+    time: time,
     pax: pax,
   })
     .then(response => {
